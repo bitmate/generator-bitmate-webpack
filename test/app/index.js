@@ -25,6 +25,7 @@ const pkg = {
     'html-webpack-plugin': '^2.9.0',
     'style-loader': '^0.13.0',
     'css-loader': '^0.23.1',
+    'file-loader': '^0.9.0',
     'url-loader': '^0.5.7',
     'postcss-loader': '^0.8.0',
     'autoprefixer': '^6.2.2',
