@@ -26,7 +26,7 @@ module.exports = function webpackConf(options) {
   if (options.js === 'typescript') {
     const test = options.client === 'react' ? lit`/\.tsx$/` : lit`/\.ts$/`;
     conf.module.loaders.push({test, exclude: lit`/node_modules/`, loader: 'tslint-loader', enforce: 'pre'});
-  } else {
+  } else if (options.client !== 'angular1') {
     conf.module.loaders.push({test: lit`/\.js$/`, exclude: lit`/node_modules/`, loader: 'eslint-loader', enforce: 'pre'});
   }
 
@@ -166,8 +166,8 @@ module.exports = function webpackConf(options) {
         test = lit`/\\.(css|styl|stylus)$/`;
       }
       cssLoaders = lit`ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader?minimize${mapToLoaders[options.css]}!postcss-loader'
+          fallback: 'style-loader',
+          use: 'css-loader${mapToLoaders[options.css]}!postcss-loader'
         })`;
     } else {
       cssLoaders = ['style-loader', 'css-loader'];
