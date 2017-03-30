@@ -711,7 +711,8 @@ test('conf with angular2/css/js', t => {
           test: lit`/\.html$/`,
           loaders: ['html-loader']
         }
-      ]
+      ],
+      exprContextCritical: false
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,

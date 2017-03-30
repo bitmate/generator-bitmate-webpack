@@ -17,6 +17,7 @@ module.exports = function webpackConf(options) {
 
   if (options.client === 'angular2') {
     conf.module.loaders.push({test: lit`/tether\\.js$/`, loader: 'expose-loader?Tether'});
+    conf.module.exprContextCritical = false;
   }
 
   if (options.test === false) {
