@@ -67,6 +67,12 @@ module.exports = bitmate.Base.extend({
         });
       }
 
+      if (this.options.client === 'angular2') {
+        Object.assign(pkg.devDependencies, {
+          'expose-loader': '^0.7.3'
+        });
+      }
+
       this.mergeJson('package.json', pkg);
     },
 

@@ -15,6 +15,10 @@ module.exports = function webpackConf(options) {
     }
   };
 
+  if (options.client === 'angular2') {
+    conf.module.loaders.push({ test: lit`/tether\\.js$/`, loader: 'expose-loader?Tether' });
+  }
+
   if (options.test === false) {
     conf.module.loaders.push(
       {test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
