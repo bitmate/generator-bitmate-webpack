@@ -689,6 +689,7 @@ test('conf with angular2/css/js', t => {
   const expected = merge([{}, conf, {
     module: {
       loaders: [
+        {test: lit`/tether\\.js$/`, loader: 'expose-loader?Tether'},
         {test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
         {test: lit`/\.ttf$/`, loader: 'file-loader'},
         {test: lit`/\.eot$/`, loader: 'file-loader'},

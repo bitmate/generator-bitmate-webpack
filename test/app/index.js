@@ -100,6 +100,17 @@ test('Configuring package.json with angular1/babel/css', t => {
   t.deepEqual(context.mergeJson['package.json'], expected);
 });
 
+test('Configuring package.json with angular2/babel/css', t => {
+  const expected = _.merge({}, pkg, {
+    devDependencies: {
+      'html-loader': '^0.4.3',
+      'expose-loader': '^0.7.3'
+    }
+  });
+  Utils.call(context, 'configuring.package', {client: 'angular2', js: 'babel', css: 'css'});
+  t.deepEqual(context.mergeJson['package.json'], expected);
+});
+
 test('Configuring package.json with react/typescript/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
