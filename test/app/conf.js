@@ -1,6 +1,6 @@
 const test = require('ava');
 const _ = require('lodash');
-const lit = require('bitmate-generator').lit;
+const lit = require('@oligibson/bitmate-generator').lit;
 const webpackConf = require('../../generators/app/conf');
 
 function merge(args) {

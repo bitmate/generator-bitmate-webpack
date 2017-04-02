@@ -1,7 +1,7 @@
 'use strict';
 
-const lit = require('bitmate-generator').lit;
-const json = require('bitmate-generator').json;
+const lit = require('@oligibson/bitmate-generator').lit;
+const json = require('@oligibson/bitmate-generator').json;
 
 module.exports = function webpackConf(options) {
   const loaderOptionsPlugin = {

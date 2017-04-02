@@ -1,13 +1,14 @@
 {
-  "name": "generator-bitmate-webpack",
+  "name": "@oligibson/generator-bitmate-webpack",
   "version": "1.0.2",
   "description": "BitMate generator for handling Webpack config",
+  "homepage": "https://bitmate.io/",
   "main": "index.js",
   "repository": "oligibson/generator-bitmate-webpack",
   "author": "BitMate",
   "license": "UNLICENSED",
   "dependencies": {
-    "bitmate-generator": "^1.0.2"
+    "@oligibson/bitmate-generator": "../bitmate-generator"
   },
   "devDependencies": {
     "ava": "^0.16.0",
@@ -43,8 +44,5 @@
   },
   "eslintConfig": {
     "extends": "xo-space/esnext"
-  },
-  "publishConfig": {
-    "registry": "http://sinopia.bitmate.io/"
   }
 }

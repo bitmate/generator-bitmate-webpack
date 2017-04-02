@@ -19,7 +19,7 @@ node {
        }
 
        stage('Install Dependencies'){
-            sh "npm set registry http://sinopia.bitmate.io"
+            sh "npm set registry https://registry.npmjs.org/"
             sh "npm set progress=false"
             sh "npm install"
        }
