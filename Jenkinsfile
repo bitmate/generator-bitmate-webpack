@@ -19,7 +19,7 @@ node {
        }
 
        stage('Install Dependencies'){
-            sh "npm set registry https://registry.npmjs.org/"
+            sh "echo '//registry.npmjs.org/:_authToken=${env.NPM_TOKEN}' > ~/.npmrc"
             sh "npm set progress=false"
             sh "npm install"
        }

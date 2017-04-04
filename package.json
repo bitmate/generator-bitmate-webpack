@@ -8,7 +8,7 @@
   "author": "BitMate",
   "license": "UNLICENSED",
   "dependencies": {
-    "@oligibson/bitmate-generator": "../bitmate-generator"
+    "@oligibson/bitmate-generator": "^1.0.0"
   },
   "devDependencies": {
     "ava": "^0.16.0",
