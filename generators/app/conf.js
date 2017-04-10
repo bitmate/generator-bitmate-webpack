@@ -1,16 +1,16 @@
-'use strict';
+/* eslint no-mixed-operators: 0 */  // --> OFF
 
 const lit = require('@oligibson/bitmate-generator').lit;
 const json = require('@oligibson/bitmate-generator').json;
 
-module.exports = function webpackConf(options) {
+module.exports = function (options) {
   const loaderOptionsPlugin = {
     options: {}
   };
   const conf = {
     module: {
       loaders: [
-        {test: lit`/\.json$/`, loaders: ['json-loader']}
+        {test: lit`/\\.json$/`, loaders: ['json-loader']}
       ]
     }
   };
@@ -22,24 +22,23 @@ module.exports = function webpackConf(options) {
 
   if (options.test === false) {
     conf.module.loaders.push(
-      {test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-      {test: lit`/\.ttf$/`, loader: 'file-loader'},
-      {test: lit`/\.eot$/`, loader: 'file-loader'},
-      {test: lit`/\.svg$/`, loader: 'file-loader'});
+      {test: lit`/\\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+      {test: lit`/\\.ttf$/`, loader: 'file-loader'},
+      {test: lit`/\\.eot$/`, loader: 'file-loader'},
+      {test: lit`/\\.svg$/`, loader: 'file-loader'});
   }
 
   if (options.js === 'typescript') {
-    const test = options.client === 'react' ? lit`/\.tsx$/` : lit`/\.ts$/`;
+    const test = options.client === 'react' ? lit`/\\.tsx$/` : lit`/\\.ts$/`;
     conf.module.loaders.push({test, exclude: lit`/node_modules/`, loader: 'tslint-loader', enforce: 'pre'});
   } else if (options.client !== 'angular1') {
-    conf.module.loaders.push({test: lit`/\.js$/`, exclude: lit`/node_modules/`, loader: 'eslint-loader', enforce: 'pre'});
+    conf.module.loaders.push({test: lit`/\\.js$/`, exclude: lit`/node_modules/`, loader: 'eslint-loader', enforce: 'pre'});
   }
 
   if (options.test === false) {
     conf.plugins = [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
-      lit`FailPlugin`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.client('index.html')
     })`
@@ -221,7 +220,7 @@ module.exports = function webpackConf(options) {
   }
   if (options.client !== 'react' && options.client !== 'vue') {
     const htmlLoader = {
-      test: lit`/\.html$/`,
+      test: lit`/\\.html$/`,
       loaders: ['html-loader']
     };
     conf.module.loaders.push(htmlLoader);

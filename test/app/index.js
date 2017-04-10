@@ -1,3 +1,6 @@
+/* eslint quote-props: 0 */  // --> OFF
+
+const path = require('path');
 const spies = require('chai-spies');
 const chai = require('chai');
 const should = chai.should(); // eslint-disable-line no-unused-vars
@@ -12,7 +15,7 @@ let context;
 test.before(() => {
   context = Utils.mock('app');
   require('../../generators/app/index');
-  process.chdir('../../');
+  process.chdir(path.resolve(__dirname, '../../'));
 });
 
 test.beforeEach(() => {
@@ -21,26 +24,25 @@ test.beforeEach(() => {
 
 const pkg = {
   devDependencies: {
-    'webpack': '2.1.0-beta.27',
-    'html-webpack-plugin': '^2.9.0',
-    'style-loader': '^0.13.0',
-    'css-loader': '^0.23.1',
-    'file-loader': '^0.9.0',
-    'url-loader': '^0.5.7',
-    'postcss-loader': '^0.8.0',
-    'autoprefixer': '^6.2.2',
-    'json-loader': '^0.5.4',
-    'extract-text-webpack-plugin': '^2.0.0-beta.3',
-    'webpack-fail-plugin': '^1.0.5'
+    'webpack': '2.3.3',
+    'html-webpack-plugin': '2.28.0',
+    'style-loader': '0.13.2',
+    'css-loader': '0.26.4',
+    'file-loader': '0.11.1',
+    'postcss-loader': '1.3.3',
+    'url-loader': '0.5.8',
+    'autoprefixer': '6.7.7',
+    'json-loader': '0.5.4',
+    'extract-text-webpack-plugin': '^2.0.0-rc.3'
   }
 };
 
 test('Configuring package.json with react/babel/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'webpack-dev-middleware': '^1.4.0',
-      'webpack-hot-middleware': '^2.6.0',
-      'react-hot-loader': '^1.3.0'
+      'webpack-dev-middleware': '1.10.1',
+      'webpack-hot-middleware': '2.18.0',
+      'react-hot-loader': '1.3.1'
     }
   });
   Utils.call(context, 'configuring.package', {client: 'react', js: 'babel', css: 'css'});
@@ -50,11 +52,11 @@ test('Configuring package.json with react/babel/css', t => {
 test('Configuring package.json with react/babel/less', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'webpack-dev-middleware': '^1.4.0',
-      'webpack-hot-middleware': '^2.6.0',
-      'react-hot-loader': '^1.3.0',
-      'less-loader': '^2.2.2',
-      'less': '^2.3.1'
+      'webpack-dev-middleware': '1.10.1',
+      'webpack-hot-middleware': '2.18.0',
+      'react-hot-loader': '1.3.1',
+      'less-loader': '2.2.3',
+      'less': '2.7.2'
     }
   });
   Utils.call(context, 'configuring.package', {client: 'react', js: 'babel', css: 'less'});
@@ -64,11 +66,11 @@ test('Configuring package.json with react/babel/less', t => {
 test('Configuring package.json with react/babel/sass', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'webpack-dev-middleware': '^1.4.0',
-      'webpack-hot-middleware': '^2.6.0',
-      'react-hot-loader': '^1.3.0',
-      'sass-loader': '^3.1.2',
-      'node-sass': '^3.4.2'
+      'webpack-dev-middleware': '1.10.1',
+      'webpack-hot-middleware': '2.18.0',
+      'react-hot-loader': '1.3.1',
+      'sass-loader': '6.0.3',
+      'node-sass': '4.5.2'
     }
   });
   Utils.call(context, 'configuring.package', {client: 'react', js: 'babel', css: 'scss'});
@@ -78,10 +80,10 @@ test('Configuring package.json with react/babel/sass', t => {
 test('Configuring package.json with react/babel/styl', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'webpack-dev-middleware': '^1.4.0',
-      'webpack-hot-middleware': '^2.6.0',
-      'react-hot-loader': '^1.3.0',
-      'stylus-loader': '^2.1.0',
+      'webpack-dev-middleware': '1.10.1',
+      'webpack-hot-middleware': '2.18.0',
+      'react-hot-loader': '1.3.1',
+      'stylus-loader': '^2.5.0',
       'stylus': '^0.54.5'
     }
   });
@@ -92,8 +94,8 @@ test('Configuring package.json with react/babel/styl', t => {
 test('Configuring package.json with angular1/babel/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'ng-annotate-loader': '^0.0.10',
-      'html-loader': '^0.4.3'
+      'ng-annotate-loader': '0.2.0',
+      'html-loader': '0.4.5'
     }
   });
   Utils.call(context, 'configuring.package', {client: 'angular1', js: 'babel', css: 'css'});
@@ -103,8 +105,8 @@ test('Configuring package.json with angular1/babel/css', t => {
 test('Configuring package.json with angular2/babel/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'html-loader': '^0.4.3',
-      'expose-loader': '^0.7.3'
+      'html-loader': '0.4.5',
+      'expose-loader': '0.7.3'
     }
   });
   Utils.call(context, 'configuring.package', {client: 'angular2', js: 'babel', css: 'css'});
@@ -114,10 +116,10 @@ test('Configuring package.json with angular2/babel/css', t => {
 test('Configuring package.json with react/typescript/css', t => {
   const expected = _.merge({}, pkg, {
     devDependencies: {
-      'webpack-dev-middleware': '^1.4.0',
-      'webpack-hot-middleware': '^2.6.0',
-      'react-hot-loader': '^1.3.0',
-      'ts-loader': '^1.2.2'
+      'webpack-dev-middleware': '1.10.1',
+      'webpack-hot-middleware': '2.18.0',
+      'react-hot-loader': '1.3.1',
+      'ts-loader': '^2.0.0'
     }
   });
   Utils.call(context, 'configuring.package', {client: 'react', js: 'typescript', css: 'css'});

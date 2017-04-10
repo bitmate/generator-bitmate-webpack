@@ -16,7 +16,7 @@ function merge(args) {
 const conf = {
   module: {
     loaders: [
-      {test: lit`/\.json$/`, loaders: ['json-loader']}
+      {test: lit`/\\.json$/`, loaders: ['json-loader']}
     ]
   }
 };
@@ -32,12 +32,12 @@ test('conf dev with react/css/babel', t => {
   const expected = merge([{}, conf, {
     module: {
       loaders: [
-        {test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-        {test: lit`/\.ttf$/`, loader: 'file-loader'},
-        {test: lit`/\.eot$/`, loader: 'file-loader'},
-        {test: lit`/\.svg$/`, loader: 'file-loader'},
+        {test: lit`/\\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+        {test: lit`/\\.ttf$/`, loader: 'file-loader'},
+        {test: lit`/\\.eot$/`, loader: 'file-loader'},
+        {test: lit`/\\.svg$/`, loader: 'file-loader'},
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -54,8 +54,7 @@ test('conf dev with react/css/babel', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
-      lit`FailPlugin`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.client('index.html')
     })`,
@@ -97,12 +96,12 @@ test('conf dev with react/scss/babel', t => {
   const expected = merge([{}, conf, {
     module: {
       loaders: [
-        {test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-        {test: lit`/\.ttf$/`, loader: 'file-loader'},
-        {test: lit`/\.eot$/`, loader: 'file-loader'},
-        {test: lit`/\.svg$/`, loader: 'file-loader'},
+        {test: lit`/\\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+        {test: lit`/\\.ttf$/`, loader: 'file-loader'},
+        {test: lit`/\\.eot$/`, loader: 'file-loader'},
+        {test: lit`/\\.svg$/`, loader: 'file-loader'},
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -119,8 +118,7 @@ test('conf dev with react/scss/babel', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
-      lit`FailPlugin`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.client('index.html')
     })`,
@@ -162,12 +160,12 @@ test('conf dev with react/less/babel', t => {
   const expected = merge([{}, conf, {
     module: {
       loaders: [
-        {test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-        {test: lit`/\.ttf$/`, loader: 'file-loader'},
-        {test: lit`/\.eot$/`, loader: 'file-loader'},
-        {test: lit`/\.svg$/`, loader: 'file-loader'},
+        {test: lit`/\\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+        {test: lit`/\\.ttf$/`, loader: 'file-loader'},
+        {test: lit`/\\.eot$/`, loader: 'file-loader'},
+        {test: lit`/\\.svg$/`, loader: 'file-loader'},
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -184,8 +182,7 @@ test('conf dev with react/less/babel', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
-      lit`FailPlugin`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.client('index.html')
     })`,
@@ -228,7 +225,7 @@ test('conf test with react/css/typescript', t => {
     module: {
       loaders: [
         {
-          test: lit`/.tsx$/`,
+          test: lit`/\\.tsx$/`,
           exclude: lit`/node_modules/`,
           loader: 'tslint-loader',
           enforce: 'pre'
@@ -281,10 +278,10 @@ test('conf with angular1/scss/js', t => {
   const expected = merge([{}, conf, {
     module: {
       loaders: [
-        {test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-        {test: lit`/\.ttf$/`, loader: 'file-loader'},
-        {test: lit`/\.eot$/`, loader: 'file-loader'},
-        {test: lit`/\.svg$/`, loader: 'file-loader'},
+        {test: lit`/\\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+        {test: lit`/\\.ttf$/`, loader: 'file-loader'},
+        {test: lit`/\\.eot$/`, loader: 'file-loader'},
+        {test: lit`/\\.svg$/`, loader: 'file-loader'},
         {
           test: lit`/\\.(css|scss)$/`,
           loaders: lit`ExtractTextPlugin.extract({
@@ -298,15 +295,14 @@ test('conf with angular1/scss/js', t => {
           loaders: ['ng-annotate-loader']
         },
         {
-          test: lit`/\.html$/`,
+          test: lit`/\\.html$/`,
           loaders: ['html-loader']
         }
       ]
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
-      lit`FailPlugin`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.client('index.html')
     })`,
@@ -350,10 +346,10 @@ test('conf with angular1/scss/js', t => {
   const expected = merge([{}, conf, {
     module: {
       loaders: [
-        {test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-        {test: lit`/\.ttf$/`, loader: 'file-loader'},
-        {test: lit`/\.eot$/`, loader: 'file-loader'},
-        {test: lit`/\.svg$/`, loader: 'file-loader'},
+        {test: lit`/\\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+        {test: lit`/\\.ttf$/`, loader: 'file-loader'},
+        {test: lit`/\\.eot$/`, loader: 'file-loader'},
+        {test: lit`/\\.svg$/`, loader: 'file-loader'},
         {
           test: lit`/\\.(css|scss)$/`,
           loaders: lit`ExtractTextPlugin.extract({
@@ -367,15 +363,14 @@ test('conf with angular1/scss/js', t => {
           loaders: ['ng-annotate-loader']
         },
         {
-          test: lit`/\.html$/`,
+          test: lit`/\\.html$/`,
           loaders: ['html-loader']
         }
       ]
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
-      lit`FailPlugin`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.client('index.html')
     })`,
@@ -419,10 +414,10 @@ test('conf with angular1/less/js', t => {
   const expected = merge([{}, conf, {
     module: {
       loaders: [
-        {test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-        {test: lit`/\.ttf$/`, loader: 'file-loader'},
-        {test: lit`/\.eot$/`, loader: 'file-loader'},
-        {test: lit`/\.svg$/`, loader: 'file-loader'},
+        {test: lit`/\\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+        {test: lit`/\\.ttf$/`, loader: 'file-loader'},
+        {test: lit`/\\.eot$/`, loader: 'file-loader'},
+        {test: lit`/\\.svg$/`, loader: 'file-loader'},
         {
           test: lit`/\\.(css|less)$/`,
           loaders: lit`ExtractTextPlugin.extract({
@@ -436,15 +431,14 @@ test('conf with angular1/less/js', t => {
           loaders: ['ng-annotate-loader']
         },
         {
-          test: lit`/\.html$/`,
+          test: lit`/\\.html$/`,
           loaders: ['html-loader']
         }
       ]
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
-      lit`FailPlugin`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.client('index.html')
     })`,
@@ -488,12 +482,12 @@ test('conf with angular1/styl/typescript', t => {
   const expected = merge([{}, conf, {
     module: {
       loaders: [
-        {test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-        {test: lit`/\.ttf$/`, loader: 'file-loader'},
-        {test: lit`/\.eot$/`, loader: 'file-loader'},
-        {test: lit`/\.svg$/`, loader: 'file-loader'},
+        {test: lit`/\\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+        {test: lit`/\\.ttf$/`, loader: 'file-loader'},
+        {test: lit`/\\.eot$/`, loader: 'file-loader'},
+        {test: lit`/\\.svg$/`, loader: 'file-loader'},
         {
-          test: lit`/.ts$/`,
+          test: lit`/\\.ts$/`,
           exclude: lit`/node_modules/`,
           loader: 'tslint-loader',
           enforce: 'pre'
@@ -511,15 +505,14 @@ test('conf with angular1/styl/typescript', t => {
           loaders: ['ng-annotate-loader', 'ts-loader']
         },
         {
-          test: lit`/\.html$/`,
+          test: lit`/\\.html$/`,
           loaders: ['html-loader']
         }
       ]
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
-      lit`FailPlugin`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.client('index.html')
     })`,
@@ -573,12 +566,12 @@ test('conf with react/css/typescript', t => {
   const expected = merge([{}, conf, {
     module: {
       loaders: [
-        {test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-        {test: lit`/\.ttf$/`, loader: 'file-loader'},
-        {test: lit`/\.eot$/`, loader: 'file-loader'},
-        {test: lit`/\.svg$/`, loader: 'file-loader'},
+        {test: lit`/\\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+        {test: lit`/\\.ttf$/`, loader: 'file-loader'},
+        {test: lit`/\\.eot$/`, loader: 'file-loader'},
+        {test: lit`/\\.svg$/`, loader: 'file-loader'},
         {
-          test: lit`/.tsx$/`,
+          test: lit`/\\.tsx$/`,
           exclude: lit`/node_modules/`,
           loader: 'tslint-loader',
           enforce: 'pre'
@@ -596,8 +589,7 @@ test('conf with react/css/typescript', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
-      lit`FailPlugin`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.client('index.html')
     })`,
@@ -650,7 +642,7 @@ test('conf with react/css/babel', t => {
     module: {
       loaders: [
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -690,12 +682,12 @@ test('conf with angular2/css/js', t => {
     module: {
       loaders: [
         {test: lit`/tether\\.js$/`, loader: 'expose-loader?Tether'},
-        {test: lit`/\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-        {test: lit`/\.ttf$/`, loader: 'file-loader'},
-        {test: lit`/\.eot$/`, loader: 'file-loader'},
-        {test: lit`/\.svg$/`, loader: 'file-loader'},
+        {test: lit`/\\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+        {test: lit`/\\.ttf$/`, loader: 'file-loader'},
+        {test: lit`/\\.eot$/`, loader: 'file-loader'},
+        {test: lit`/\\.svg$/`, loader: 'file-loader'},
         {
-          test: lit`/.js$/`,
+          test: lit`/\\.js$/`,
           exclude: lit`/node_modules/`,
           loader: 'eslint-loader',
           enforce: 'pre'
@@ -708,7 +700,7 @@ test('conf with angular2/css/js', t => {
         })`
         },
         {
-          test: lit`/\.html$/`,
+          test: lit`/\\.html$/`,
           loaders: ['html-loader']
         }
       ],
@@ -716,8 +708,7 @@ test('conf with angular2/css/js', t => {
     },
     plugins: [
       lit`new webpack.optimize.OccurrenceOrderPlugin()`,
-      lit`new webpack.NoErrorsPlugin()`,
-      lit`FailPlugin`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
       lit`new HtmlWebpackPlugin({
       template: conf.path.client('index.html')
     })`,
