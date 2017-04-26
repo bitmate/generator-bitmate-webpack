@@ -67,7 +67,7 @@ module.exports = function (options) {
     }
   } else {
     conf.output = {
-      path: lit`path.join(process.cwd(), conf.paths.dist)`,
+      path: options.server === 'none' ? lit`path.join(process.cwd(), conf.paths.dist)` : lit`path.join(process.cwd(), conf.path.dist('client'))`,
       filename: '[name]-[hash].js'
     };
   }
@@ -101,14 +101,17 @@ module.exports = function (options) {
         index
       ];
     } else if (options.dist === true && options.client !== 'angular2') {
-      // const exceptions = [];
-      const vendor = 'Object.keys(pkg.dependencies)';
+      const exceptions = [];
+      let vendor = 'Object.keys(pkg.dependencies)';
       // if (options.client === 'angular2') {
       //   exceptions.push(`'zone.js'`);
       // }
-      // if (exceptions.length) {
-      //   vendor += `.filter(dep => [${exceptions.join(', ')}].indexOf(dep) === -1)`;
-      // }
+      if (options.server === 'express') {
+        exceptions.push(`'express', 'body-parser', 'compression', 'connect-livereload', 'cookie-parser', 'ejs', 'errorhandler', 'express-session', 'lusca', 'method-override', 'morgan', 'serve-favicon'`);
+      }
+      if (exceptions.length) {
+        vendor += `.filter(dep => [${exceptions.join(', ')}].indexOf(dep) === -1)`;
+      }
       conf.entry = {
         app: index,
         vendor: lit`${vendor}`

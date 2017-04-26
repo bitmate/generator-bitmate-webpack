@@ -267,10 +267,80 @@ test('conf test with react/css/typescript', t => {
   t.deepEqual(result, expected);
 });
 
+test('conf with express/angular1/scss/js', t => {
+  const options = {
+    test: false,
+    dist: true,
+    server: 'express',
+    client: 'angular1',
+    css: 'scss',
+    js: 'js'
+  };
+  const expected = merge([{}, conf, {
+    module: {
+      loaders: [
+        {test: lit`/\\.(woff|woff2)$/`, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+        {test: lit`/\\.ttf$/`, loader: 'file-loader'},
+        {test: lit`/\\.eot$/`, loader: 'file-loader'},
+        {test: lit`/\\.svg$/`, loader: 'file-loader'},
+        {
+          test: lit`/\\.(css|scss)$/`,
+          loaders: lit`ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader!sass-loader!postcss-loader'
+        })`
+        },
+        {
+          test: lit`/\\.js$/`,
+          exclude: lit`/node_modules/`,
+          loaders: ['ng-annotate-loader']
+        },
+        {
+          test: lit`/\\.html$/`,
+          loaders: ['html-loader']
+        }
+      ]
+    },
+    plugins: [
+      lit`new webpack.optimize.OccurrenceOrderPlugin()`,
+      lit`new webpack.NoEmitOnErrorsPlugin()`,
+      lit`new HtmlWebpackPlugin({
+      template: conf.path.client('index.html')
+    })`,
+      lit`new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    })`,
+      lit`new webpack.optimize.UglifyJsPlugin({
+      output: {comments: false},
+      compress: {unused: true, dead_code: true, warnings: false} // eslint-disable-line camelcase
+    })`,
+      lit`new ExtractTextPlugin('index-[contenthash].css')`,
+      lit`new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})`,
+      lit`new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: () => [autoprefixer]
+      }
+    })`
+    ],
+    output: {
+      path: lit`path.join(process.cwd(), conf.path.dist(\'client\'))`,
+      filename: '[name]-[hash].js'
+    },
+    entry: {
+      app: lit`\`./\${conf.path.client('index')}\``,
+      vendor: lit`Object.keys(pkg.dependencies).filter(dep => [\'express\', \'body-parser\', \'compression\', \'connect-livereload\', \'cookie-parser\', \'ejs\', \'errorhandler\', \'express-session\', \'lusca\', \'method-override\', \'morgan\', \'serve-favicon\'].indexOf(dep) === -1)`
+    }
+  }]);
+  const result = webpackConf(options);
+  t.deepEqual(result, expected);
+});
+
 test('conf with angular1/scss/js', t => {
   const options = {
     test: false,
     dist: true,
+    server: 'none',
     client: 'angular1',
     css: 'scss',
     js: 'js'
@@ -339,6 +409,7 @@ test('conf with angular1/scss/js', t => {
   const options = {
     test: false,
     dist: true,
+    server: 'none',
     client: 'angular1',
     css: 'scss',
     js: 'js'
@@ -407,6 +478,7 @@ test('conf with angular1/less/js', t => {
   const options = {
     test: false,
     dist: true,
+    server: 'none',
     client: 'angular1',
     css: 'less',
     js: 'js'
@@ -475,6 +547,7 @@ test('conf with angular1/styl/typescript', t => {
   const options = {
     test: false,
     dist: true,
+    server: 'none',
     client: 'angular1',
     css: 'styl',
     js: 'typescript'
@@ -674,6 +747,7 @@ test('conf with angular2/css/js', t => {
   const options = {
     test: false,
     dist: true,
+    server: 'none',
     client: 'angular2',
     css: 'css',
     js: 'js'
